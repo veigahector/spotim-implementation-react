@@ -9,25 +9,9 @@ class SpotIMConversation extends React.Component {
 		this.container = null;
 	}
 	componentDidMount() {
-		if (!this.container) {
-			console.warn('SpotIMConversation: missing container');
-			return;
-		}
-		if (!this.props.spotId) {
-			console.warn('SpotIMConversation: missing Spot ID');
-			return;
-		}
-		if (!this.props.postId) {
-			console.warn('SpotIMConversation: missing Post ID');
-			return;
-		}
-		if (!window || !window.document) {
-			console.warn('SpotIMConversation: this component supports client only');
-			return;
-		}
-		this.initConversation();
+		this.initConversation(this.props);
 	}
-	initConversation() {
+	initConversation(props) {
 		var {
 			spotId,
 			postId,
@@ -36,7 +20,23 @@ class SpotIMConversation extends React.Component {
 			disqusUrl,
 			enableSeo,
 			messagesCount
-		} = this.props;
+		} = props;
+		if (!this.container) {
+			console.warn('SpotIMConversation: missing container');
+			return;
+		}
+		if (!props.spotId) {
+			console.warn('SpotIMConversation: missing Spot ID');
+			return;
+		}
+		if (!props.postId) {
+			console.warn('SpotIMConversation: missing Post ID');
+			return;
+		}
+		if (!window || !window.document) {
+			console.warn('SpotIMConversation: this component supports client only');
+			return;
+		}
 		if (!canonicalUrl) {
 			canonicalUrl = window.location.href;
 		}
@@ -60,6 +60,20 @@ class SpotIMConversation extends React.Component {
 			launcherScript.setAttribute('data-messages-count', messagesCount);
 		}
 		this.container.appendChild(launcherScript);
+	}
+	destroyConversation() {
+		if (!this.container) {
+			console.warn('SpotIMConversation: missing container');
+			return false;
+		}
+		this.container.innerHTML = '';
+		return true;
+	}
+	componentWillReceiveProps(nextProps) {
+		var destroyed = this.destroyConversation();
+		if (destroyed) {
+			this.initConversation(nextProps);
+		}
 	}
 	shouldComponentUpdate() {
 		return false;
