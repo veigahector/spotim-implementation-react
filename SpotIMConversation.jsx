@@ -70,15 +70,19 @@ class SpotIMConversation extends React.Component {
 		return true;
 	}
 	componentWillReceiveProps(nextProps) {
-		var destroyed = this.destroyConversation();
-		if (destroyed) {
-			this.initConversation(nextProps);
+		var { spotId: currentSpotId, postId: currentPostId } = this.props;
+		var { spotId: nextSpotId, postId: nextPostId } = nextProps;
+		if (currentSpotId !== nextSpotId || currentPostId !== nextPostId) {
+			var destroyed = this.destroyConversation();
+			if (destroyed) {
+				this.initConversation(nextProps);
+			}
 		}
 	}
 	shouldComponentUpdate() {
 		return false;
 	}
 	render() {
-		return <div ref={ el => this.container = el }></div>;
+		return <div ref={el => this.container = el}></div>;
 	}
 }
