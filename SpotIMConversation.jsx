@@ -3,6 +3,7 @@ class SpotIMConversation extends React.Component {
   static defaultProps = {
     messagesCount: null,
     enableSeo: false,
+    articleTags: '',
   };
   constructor() {
     super();
@@ -20,6 +21,7 @@ class SpotIMConversation extends React.Component {
       disqusUrl,
       enableSeo,
       messagesCount,
+      articleTags,
     } = props;
     if (!this.container) {
       console.warn('SpotIMConversation: missing container');
@@ -62,6 +64,9 @@ class SpotIMConversation extends React.Component {
     if (messagesCount) {
       launcherScript.setAttribute('data-messages-count', messagesCount);
     }
+    if (articleTags) {
+      launcherScript.setAttribute('data-article-tags', articleTags);
+    }
     this.container.appendChild(launcherScript);
   }
   destroyConversation() {
@@ -73,8 +78,8 @@ class SpotIMConversation extends React.Component {
     return true;
   }
   componentWillReceiveProps(nextProps) {
-    var {spotId: currentSpotId, postId: currentPostId} = this.props;
-    var {spotId: nextSpotId, postId: nextPostId} = nextProps;
+    var { spotId: currentSpotId, postId: currentPostId } = this.props;
+    var { spotId: nextSpotId, postId: nextPostId } = nextProps;
     if (currentSpotId !== nextSpotId || currentPostId !== nextPostId) {
       var destroyed = this.destroyConversation();
       if (destroyed) {

@@ -1,4 +1,4 @@
-# spotim-implementation-react
+# Spot.IM Implementation - React Components
 Example:
 
 ```
