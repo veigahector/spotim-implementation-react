@@ -1,4 +1,4 @@
-class SpotIMPopularInTheCommunity extends React.Component {
+export default class SpotIMPopularInTheCommunity extends React.Component {
   constructor() {
     super();
     this.container = null;
@@ -21,7 +21,7 @@ class SpotIMPopularInTheCommunity extends React.Component {
     this.initPopularInTheCommunity();
   }
   initPopularInTheCommunity() {
-    var {spotId} = this.props;
+    var { spotId } = this.props;
     var script = document.createElement('script');
     script.setAttribute('async', 'async');
     script.setAttribute('src', 'https://recirculation.spot.im/spot/' + spotId);

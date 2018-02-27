@@ -1,4 +1,4 @@
-class SpotIMSideRail extends React.Component {
+export default class SpotIMSideRail extends React.Component {
   constructor() {
     super();
     this.container = null;
@@ -19,7 +19,7 @@ class SpotIMSideRail extends React.Component {
     this.initSideRail();
   }
   initSideRail() {
-    var {spotId} = this.props;
+    var { spotId } = this.props;
     var script = document.createElement('script');
     script.setAttribute('async', 'async');
     script.setAttribute('src', 'https://mc-siderail.spot.im/spot/' + spotId);

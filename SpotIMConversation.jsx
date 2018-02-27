@@ -1,4 +1,4 @@
-class SpotIMConversation extends React.Component {
+export default class SpotIMConversation extends React.Component {
   static displayName = 'SpotIMConversation';
   static defaultProps = {
     messagesCount: null,
